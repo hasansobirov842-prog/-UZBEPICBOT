@@ -26,7 +26,7 @@ BOT_TOKEN = os.getenv("BOT_TOKEN")
 ADMIN_ID = int(os.getenv("ADMIN_ID", "0"))
 
 # GitHub Pages manzilingni shu yerga yozasan
-WEBAPP_URL = "https://USERNAME.github.io/REPOSITORY/"
+WEBAPP_URL = "https://hasansobirov842-prog.github.io/-UZBEPICBOT/"
 
 DB_NAME = "uzb_epic.db"
 
