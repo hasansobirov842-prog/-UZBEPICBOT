@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+
+<title>UZB EPIC</title>
+
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    -webkit-tap-highlight-color:transparent;
+}
+
+body{
+    background:
+        radial-gradient(circle at 50% -10%,#33206b 0,#151229 38%,#080811 78%);
+    color:#fff;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    min-height:100vh;
+    padding-bottom:90px;
+}
+
+.app{
+    width:100%;
+    max-width:520px;
+    margin:auto;
+    padding:18px 15px;
+}
+
+/* HEADER */
+
+.header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:18px;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.logo-icon{
+    width:43px;
+    height:43px;
+    border-radius:14px;
+    background:linear-gradient(135deg,#8d5cff,#5430d6);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:23px;
+    box-shadow:0 8px 25px #6d45ff55;
+}
+
+.logo-title{
+    font-size:20px;
+    font-weight:800;
+    letter-spacing:.3px;
+}
+
+.logo-sub{
+    color:#9c99b4;
+    font-size:11px;
+    margin-top:2px;
+}
+
+.balance{
+    background:#17152a;
+    border:1px solid #ffffff0d;
+    border-radius:13px;
+    padding:8px 12px;
+    font-size:13px;
+}
+
+/* PROFILE */
+
+.profile-card{
+    background:linear-gradient(135deg,#211b3e,#151329);
+    border:1px solid #ffffff10;
+    border-radius:24px;
+    padding:18px;
+    margin-bottom:15px;
+    box-shadow:0 12px 40px #0005;
+}
+
+.profile-top{
+    display:flex;
+    align-items:center;
+    gap:13px;
+}
+
+.avatar{
+    width:58px;
+    height:58px;
+    border-radius:19px;
+    background:linear-gradient(135deg,#a879ff,#5530d9);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:27px;
+    font-weight:800;
+}
+
+.username{
+    font-size:18px;
+    font-weight:800;
+}
+
+.user-id{
+    color:#858199;
+    font-size:12px;
+    margin-top:4px;
+}
+
+/* HERO */
+
+.hero{
+    position:relative;
+    overflow:hidden;
+    min-height:190px;
+    border-radius:25px;
+    padding:24px;
+    margin-bottom:16px;
+    background:
+        radial-gradient(circle at 90% 10%,#b05cff88,transparent 35%),
+        linear-gradient(135deg,#352070,#17132e);
+    border:1px solid #ffffff12;
+}
+
+.hero:after{
+    content:"✦";
+    position:absolute;
+    right:25px;
+    top:23px;
+    font-size:85px;
+    opacity:.12;
+}
+
+.hero-label{
+    color:#bda8ff;
+    font-size:12px;
+    font-weight:700;
+    text-transform:uppercase;
+}
+
+.hero h1{
+    font-size:29px;
+    margin-top:8px;
+    line-height:1.05;
+}
+
+.hero p{
+    color:#b9b4cd;
+    font-size:13px;
+    margin-top:9px;
+    max-width:260px;
+}
+
+.hero-btn{
+    display:inline-flex;
+    margin-top:18px;
+    padding:11px 17px;
+    border-radius:12px;
+    background:#fff;
+    color:#181326;
+    font-weight:800;
+    font-size:13px;
+}
+
+/* SECTION */
+
+.section-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin:20px 2px 11px;
+}
+
+.section-title h2{
+    font-size:17px;
+}
+
+.section-title span{
+    color:#858099;
+    font-size:11px;
+}
+
+/* GRID */
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:11px;
+}
+
+.card{
+    min-height:132px;
+    padding:17px;
+    border-radius:20px;
+    background:#151421;
+    border:1px solid #ffffff0c;
+    position:relative;
+    overflow:hidden;
+    transition:.15s;
+}
+
+.card:active{
+    transform:scale(.97);
+}
+
+.card-icon{
+    width:42px;
+    height:42px;
+    border-radius:14px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:21px;
+    background:#28223f;
+    margin-bottom:13px;
+}
+
+.card h3{
+    font-size:14px;
+}
+
+.card p{
+    color:#807c94;
+    font-size:10px;
+    margin-top:4px;
+}
+
+.stars .card-icon{
+    background:#503c19;
+}
+
+.ton .card-icon{
+    background:#183b52;
+}
+
+.gift .card-icon{
+    background:#45204b;
+}
+
+.box .card-icon{
+    background:#203c2e;
+}
+
+/* BOX */
+
+.free-box{
+    background:linear-gradient(135deg,#1d372b,#131c18);
+    border:1px solid #3c815d33;
+    border-radius:22px;
+    padding:18px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-top:11px;
+}
+
+.free-box h3{
+    font-size:15px;
+}
+
+.free-box p{
+    color:#8eaa9b;
+    font-size:11px;
+    margin-top:4px;
+}
+
+.open-btn{
+    background:#51d58b;
+    color:#07140d;
+    border:0;
+    border-radius:12px;
+    padding:10px 15px;
+    font-weight:800;
+}
+
+/* BOTTOM NAV */
+
+.bottom-nav{
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    height:76px;
+    background:#0d0c15ee;
+    backdrop-filter:blur(18px);
+    border-top:1px solid #ffffff0c;
+    display:flex;
+    justify-content:center;
+    z-index:20;
+}
+
+.nav-inner{
+    width:100%;
+    max-width:520px;
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+}
+
+.nav-item{
+    width:20%;
+    text-align:center;
+    color:#77738a;
+    font-size:10px;
+    padding-top:8px;
+}
+
+.nav-item div{
+    font-size:20px;
+    margin-bottom:4px;
+}
+
+.nav-item.active{
+    color:#a77bff;
+}
+
+/* MODAL */
+
+.modal-bg{
+    position:fixed;
+    inset:0;
+    background:#0009;
+    backdrop-filter:blur(7px);
+    display:none;
+    align-items:flex-end;
+    z-index:50;
+}
+
+.modal{
+    width:100%;
+    max-width:520px;
+    margin:auto;
+    background:#151421;
+    border-radius:26px 26px 0 0;
+    padding:23px;
+    border-top:1px solid #ffffff12;
+}
+
+.modal h2{
+    font-size:21px;
+}
+
+.modal p{
+    color:#9893a9;
+    font-size:13px;
+    margin-top:7px;
+    line-height:1.5;
+}
+
+.modal-btn{
+    width:100%;
+    border:0;
+    border-radius:14px;
+    padding:14px;
+    margin-top:16px;
+    background:#8b5cf6;
+    color:white;
+    font-weight:800;
+    font-size:14px;
+}
+
+.close-btn{
+    background:#242231;
+}
+
+/* TOAST */
+
+.toast{
+    position:fixed;
+    left:50%;
+    bottom:92px;
+    transform:translateX(-50%) translateY(20px);
+    background:#252332;
+    padding:11px 17px;
+    border-radius:12px;
+    font-size:12px;
+    opacity:0;
+    pointer-events:none;
+    transition:.25s;
+    z-index:100;
+    white-space:nowrap;
+}
+
+.toast.show{
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+    <div class="header">
+        <div class="logo">
+            <div class="logo-icon">✦</div>
+            <div>
+                <div class="logo-title">UZB EPIC</div>
+                <div class="logo-sub">Premium Telegram Store</div>
+            </div>
+        </div>
+
+        <div class="balance">
+            💎 <span id="balance">0</span>
+        </div>
+    </div>
+
+
+    <div class="profile-card">
+        <div class="profile-top">
+
+            <div class="avatar" id="avatar">U</div>
+
+            <div>
+                <div class="username" id="username">
+                    UZB EPIC User
+                </div>
+
+                <div class="user-id" id="userid">
+                    ID: -
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="hero">
+
+        <div class="hero-label">
+            UZB EPIC
+        </div>
+
+        <h1>
+            Welcome to<br>
+            Epic World ✨
+        </h1>
+
+        <p>
+            Stars, Gifts va TON xizmatlarini
+            bitta joydan boshqaring.
+        </p>
+
+        <div class="hero-btn" onclick="openFreeBox()">
+            🎁 Free Box
+        </div>
+
+    </div>
+
+
+    <div class="section-title">
+        <h2>Explore</h2>
+        <span>UZB EPIC</span>
+    </div>
+
+
+    <div class="grid">
+
+        <div class="card stars" onclick="openSection('stars')">
+            <div class="card-icon">⭐</div>
+            <h3>Telegram Stars</h3>
+            <p>Stars paketlarini ko‘rish</p>
+        </div>
+
+        <div class="card ton" onclick="openSection('ton')">
+            <div class="card-icon">💎</div>
+            <h3>TON</h3>
+            <p>TON xizmatlari</p>
+        </div>
+
+        <div class="card gift" onclick="openSection('gifts')">
+            <div class="card-icon">🎁</div>
+            <h3>Gifts</h3>
+            <p>Telegram Gifts</p>
+        </div>
+
+        <div class="card box" onclick="openFreeBox()">
+            <div class="card-icon">🎉</div>
+            <h3>Free Box</h3>
+            <p>Bepul bonus olish</p>
+        </div>
+
+    </div>
+
+
+    <div class="section-title">
+        <h2>Quick Access</h2>
+    </div>
+
+
+    <div class="free-box">
+
+        <div>
+            <h3>🎁 Daily Free Box</h3>
+            <p>Har kuni bonus olish imkoniyati</p>
+        </div>
+
+        <button class="open-btn" onclick="openFreeBox()">
+            OPEN
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- BOTTOM NAV -->
+
+<div class="bottom-nav">
+
+    <div class="nav-inner">
+
+        <div class="nav-item active" onclick="home()">
+            <div>⌂</div>
+            Home
+        </div>
+
+        <div class="nav-item" onclick="openFreeBox()">
+            <div>🎁</div>
+            Box
+        </div>
+
+        <div class="nav-item" onclick="openSection('gifts')">
+            <div>🎁</div>
+            Gifts
+        </div>
+
+        <div class="nav-item" onclick="openSection('stars')">
+            <div>⭐</div>
+            Stars
+        </div>
+
+        <div class="nav-item" onclick="openProfile()">
+            <div>👤</div>
+            Profile
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- MODAL -->
+
+<div class="modal-bg" id="modalBg">
+
+    <div class="modal">
+
+        <h2 id="modalTitle">
+            UZB EPIC
+        </h2>
+
+        <p id="modalText">
+            Loading...
+        </p>
+
+        <button class="modal-btn" onclick="modalAction()">
+            Davom etish
+        </button>
+
+        <button class="modal-btn close-btn" onclick="closeModal()">
+            Yopish
+        </button>
+
+    </div>
+
+</div>
+
+
+<div class="toast" id="toast">
+    Tayyor!
+</div>
+
+
+<script>
+
+const tg = window.Telegram.WebApp;
+
+tg.ready();
+tg.expand();
+
+let currentSection = "";
+
+
+/* USER */
+
+function loadUser(){
+
+    const user = tg.initDataUnsafe?.user;
+
+    if(!user) return;
+
+    const name =
+        user.first_name ||
+        user.username ||
+        "User";
+
+    document.getElementById("username").innerText =
+        name;
+
+    document.getElementById("userid").innerText =
+        "ID: " + user.id;
+
+    document.getElementById("avatar").innerText =
+        name.charAt(0).toUpperCase();
+
+}
+
+
+/* HOME */
+
+function home(){
+
+    closeModal();
+
+    showToast("Home");
+
+}
+
+
+/* SECTION */
+
+function openSection(type){
+
+    currentSection = type;
+
+    const title =
+        document.getElementById("modalTitle");
+
+    const text =
+        document.getElementById("modalText");
+
+    if(type === "stars"){
+
+        title.innerText = "⭐ Telegram Stars";
+
+        text.innerText =
+            "Stars paketlari shu yerda bo‘ladi. " +
+            "Keyingi bosqichda siz narxlar va " +
+            "to‘lov tizimini ulaysiz.";
+
+    }
+
+    if(type === "ton"){
+
+        title.innerText = "💎 TON";
+
+        text.innerText =
+            "TON bo‘limi tayyor. " +
+            "Bu yerga TON mahsulotlari va narxlarini qo‘shish mumkin.";
+
+    }
+
+    if(type === "gifts"){
+
+        title.innerText = "🎁 Gifts";
+
+        text.innerText =
+            "Telegram Gifts bo‘limi. " +
+            "Keyingi bosqichda Gift katalogi qo‘shiladi.";
+
+    }
+
+    document.getElementById("modalBg").style.display =
+        "flex";
+}
+
+
+/* FREE BOX */
+
+function openFreeBox(){
+
+    currentSection = "box";
+
+    document.getElementById("modalTitle").innerText =
+        "🎁 Free Box";
+
+    document.getElementById("modalText").innerText =
+        "Bugungi Free Box hali ochilmagan. " +
+        "Keyingi bosqichda cooldown va bonus tizimini ulaymiz.";
+
+    document.getElementById("modalBg").style.display =
+        "flex";
+}
+
+
+/* PROFILE */
+
+function openProfile(){
+
+    const user = tg.initDataUnsafe?.user;
+
+    if(!user){
+
+        showToast("Telegram orqali oching");
+
+        return;
+    }
+
+    document.getElementById("modalTitle").innerText =
+        "👤 Profil";
+
+    document.getElementById("modalText").innerText =
+        "👤 " +
+        (user.first_name || "User") +
+        "\n\n🆔 ID: " +
+        user.id +
+        "\n\n💎 Balance: 0";
+
+    document.getElementById("modalBg").style.display =
+        "flex";
+}
+
+
+/* MODAL ACTION */
+
+function modalAction(){
+
+    if(currentSection === "stars"){
+
+        showToast("Stars katalogi tez orada");
+
+    }else if(currentSection === "ton"){
+
+        showToast("TON bo‘limi");
+
+    }else if(currentSection === "gifts"){
+
+        showToast("Gift katalogi tez orada");
+
+    }else if(currentSection === "box"){
+
+        showToast("Free Box tayyorlanmoqda");
+
+    }
+
+}
+
+
+/* CLOSE */
+
+function closeModal(){
+
+    document.getElementById("modalBg").style.display =
+        "none";
+
+}
+
+
+/* TOAST */
+
+function showToast(message){
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.innerText = message;
+
+    toast.classList.add("show");
+
+    setTimeout(() => {
+
+        toast.classList.remove("show");
+
+    },2200);
+
+}
+
+
+/* START */
+
+loadUser();
+
+</script>
+
+</body>
+</html>
